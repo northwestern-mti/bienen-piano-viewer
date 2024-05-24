@@ -50,13 +50,20 @@ class App {
 		}
 	}
 
+	/**
+	 * Sets up the scrub bar controller.
+	 * @param  {Element} el
+	 * @return {ScrubBar}
+	 */
 	createScrubBar(el) {
 		const scrubBar = new ScrubBar(el);
+		this.scrubBar = scrubBar;
 		scrubBar.setApp(this);
 		window.VIEWER.scrubBar = scrubBar;
 
-		const viewer = this.viewer || this.createViewer();
-		viewer.setTimeUpdateCallback(scrubBar.updateTime);
+		if (this.viewer) this.viewer.setTimeUpdateCallback(scrubBar.updateTime);
+
+		return scrubBar;
 	}
 
 	/**
@@ -69,6 +76,7 @@ class App {
 		this.dropEl.innerHTML = '';
 		this.dropEl.appendChild(this.viewerEl);
 		this.viewer = new Viewer(this.viewerEl, this.options);
+		if (this.scrubBar) this.viewer.setTimeUpdateCallback(this.scrubBar.updateTime);
 		return this.viewer;
 	}
 
