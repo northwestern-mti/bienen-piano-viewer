@@ -200,6 +200,45 @@ export class Viewer {
 		this.axesRenderer.setSize(this.axesDiv.clientWidth, this.axesDiv.clientHeight);
 	}
 
+	loadURL(url) {
+		return new Promise((resolve, reject) => {
+			console.log('loading: ', url)
+			const loader = new GLTFLoader(MANAGER)
+				.setCrossOrigin('anonymous')
+				.setDRACOLoader(DRACO_LOADER)
+				.setKTX2Loader(KTX2_LOADER.detectSupport(this.renderer))
+				.setMeshoptDecoder(MeshoptDecoder);
+
+			loader.load(
+				url,
+				(gltf) => {
+					console.log('loaded: ', gltf)
+					window.VIEWER.json = gltf;
+
+					const scene = gltf.scene || gltf.scenes[0];
+					const clips = gltf.animations || [];
+
+					if (!scene) {
+						// Valid, but not supported by this viewer.
+						throw new Error(
+							'This model contains no scene, and cannot be viewed here. However,' +
+								' it may contain individual 3D resources.',
+						);
+					}
+
+					this.setContent(scene, clips);
+
+					// See: https://github.com/google/draco/issues/349
+					// DRACOLoader.releaseDecoderModule();
+
+					resolve(gltf);
+				},
+				undefined,
+				reject,
+			);
+		});
+	}
+
 	load(url, rootPath, assetMap) {
 		const baseURL = LoaderUtils.extractUrlBase(url);
 

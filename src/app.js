@@ -1,6 +1,5 @@
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { Viewer } from './viewer.js';
-import { SimpleDropzone } from 'simple-dropzone';
 import { Validator } from './validator.js';
 import { Footer } from './components/footer';
 import queryString from 'query-string';
@@ -37,8 +36,7 @@ class App {
 		this.inputEl = el.querySelector('#file-input');
 		this.validator = new Validator(el);
 
-		this.createDropzone();
-		this.hideSpinner();
+		// this.hideSpinner();
 
 		const options = this.options;
 
@@ -50,16 +48,6 @@ class App {
 		if (options.model) {
 			this.view(options.model, '', new Map());
 		}
-	}
-
-	/**
-	 * Sets up the drag-and-drop controller.
-	 */
-	createDropzone() {
-		const dropCtrl = new SimpleDropzone(this.dropEl, this.inputEl);
-		dropCtrl.on('drop', ({ files }) => this.load(files));
-		dropCtrl.on('dropstart', () => this.showSpinner());
-		dropCtrl.on('droperror', () => this.hideSpinner());
 	}
 
 	createScrubBar(el) {
@@ -116,7 +104,8 @@ class App {
 
 		const viewer = this.viewer || this.createViewer();
 
-		const fileURL = typeof rootFile === 'string' ? rootFile : URL.createObjectURL(rootFile);
+		// const fileURL = typeof rootFile === 'string' ? rootFile : URL.createObjectURL(rootFile);
+		const fileURL = rootPath + rootFile;
 
 		const cleanup = () => {
 			this.hideSpinner();
@@ -124,7 +113,7 @@ class App {
 		};
 
 		viewer
-			.load(fileURL, rootPath, fileMap)
+			.loadURL(fileURL)
 			.catch((e) => this.onError(e))
 			.then((gltf) => {
 				// TODO: GLTFLoader parsing can fail on invalid files. Ideally,

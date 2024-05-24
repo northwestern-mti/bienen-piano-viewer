@@ -39,11 +39,20 @@ body {
   background: #252525;
   padding: 2em;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .placeholder p {
   font-size: 1.2rem;
   color: #999;
+}
+
+.placeholder button {
+  font-size: 1.2rem;
+  color: #252525;
+  padding: 8px;
 }
 
 .viewer {
