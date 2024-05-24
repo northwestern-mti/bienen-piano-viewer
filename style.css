@@ -336,8 +336,9 @@ footer .separator {
 
 .scrub-bar-container {
   display: flex;
-  margin: 20px 8px;
+  margin: 36px 12px;
   z-index: 99;
+  gap: 8px;
 }
 
 .scrub-bar-play-button {
@@ -346,6 +347,7 @@ footer .separator {
 
 .scrub-bar-progress-bar {
   flex-grow: 1;
+  accent-color: #836EAA;
 }
 
 .scrub-bar-timestamps {
