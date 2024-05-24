@@ -21,6 +21,7 @@ body {
   width: 100vw;
   flex-grow: 1;
   position: relative;
+  flex-direction: column;
 }
 
 .dropzone {
@@ -317,4 +318,28 @@ footer .separator {
     transform: scale(1.0);
     opacity: 0;
   }
+}
+
+
+/******************************************************************************
+ * Play Bar UI
+ */
+
+.scrub-bar-container {
+  display: flex;
+  margin: 20px 8px;
+  z-index: 99;
+}
+
+.scrub-bar-play-button {
+  width: 6em;
+}
+
+.scrub-bar-progress-bar {
+  flex-grow: 1;
+}
+
+.scrub-bar-timestamps {
+  color: white;
+  font-family: monospace;
 }

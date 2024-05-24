@@ -5,6 +5,8 @@ import { Validator } from './validator.js';
 import { Footer } from './components/footer';
 import queryString from 'query-string';
 
+import { ScrubBar } from './scrub-bar.js'
+
 window.VIEWER = {};
 
 if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
@@ -58,6 +60,15 @@ class App {
 		dropCtrl.on('drop', ({ files }) => this.load(files));
 		dropCtrl.on('dropstart', () => this.showSpinner());
 		dropCtrl.on('droperror', () => this.hideSpinner());
+	}
+
+	createScrubBar(el) {
+		const scrubBar = new ScrubBar(el);
+		scrubBar.setApp(this);
+		window.VIEWER.scrubBar = scrubBar;
+
+		const viewer = this.viewer || this.createViewer();
+		viewer.setTimeUpdateCallback(scrubBar.updateTime);
 	}
 
 	/**
@@ -154,6 +165,7 @@ document.body.innerHTML += Footer();
 
 document.addEventListener('DOMContentLoaded', () => {
 	const app = new App(document.body, location);
+	app.createScrubBar(document.getElementById('scrub-bar-container'))
 
 	window.VIEWER.app = app;
 

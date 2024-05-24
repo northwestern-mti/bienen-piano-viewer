@@ -45,5 +45,27 @@
 			</div>
 		</div>
 		<div class="spinner"></div>
+
+		<!-- Scrub Bar -->
+		<div id="scrub-bar-container" class="scrub-bar-container">
+			<audio id="piano-audio"></audio>
+
+			<!-- Play/Pause Button -->
+			<button id="play-button" class="scrub-bar-play-button" onclick={VIEWER.scrubBar.play()}>Play</button>
+
+			<!-- Progress Bar -->
+			<input id='seek-range'
+				class="scrub-bar-progress-bar"
+				type="range" value='0' step="0.01"
+				onmousedown={VIEWER.scrubBar.startScrub()} onmouseup={VIEWER.scrubBar.endScrub()} oninput={VIEWER.scrubBar.seekTo(event)}
+			></input>
+
+			<!-- Timestamps -->
+			<div class="scrub-bar-timestamps">
+				<span id="scrub-current-time"></span> / <span id="scrub-total-time"></span>
+			</div>
+		</div>
+		<!-- /Scrub Bar -->
+
 	</main>
 </body>

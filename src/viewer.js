@@ -138,6 +138,8 @@ export class Viewer {
 		this.animate = this.animate.bind(this);
 		requestAnimationFrame(this.animate);
 		window.addEventListener('resize', this.resize.bind(this), false);
+
+		this.paused = true;
 	}
 
 	animate(time) {
@@ -147,10 +149,34 @@ export class Viewer {
 
 		this.controls.update();
 		this.stats.update();
-		this.mixer && this.mixer.update(dt);
+
+		if (!this.paused) {
+			this.mixer && this.mixer.update(dt);
+		}
+
 		this.render();
 
+		if (this.timeUpdateCallback) {
+			if (this.mixer) {
+				this.timeUpdateCallback(this.mixer.time, this.clips[0].duration)
+			} else {
+				this.timeUpdateCallback(0, 0)
+			}
+		}
+
 		this.prevTime = time;
+	}
+
+	setTimeUpdateCallback(callback) {
+		this.timeUpdateCallback = callback;
+	}
+
+	pause() {
+		this.paused = true;
+	}
+
+	play() {
+		this.paused = false;
 	}
 
 	render() {
