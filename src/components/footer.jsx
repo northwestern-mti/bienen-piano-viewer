@@ -6,6 +6,14 @@ import { REVISION } from 'three';
 export function Footer() {
 	return (
 		<footer>
+			<a class="item" target="_blank" href="https://mti.it.northwestern.edu/">
+				Northwestern Media & Technology Innovation
+			</a>
+
+			<span class="separator" aria-hidden="true">
+				|
+			</span>
+
 			<a class="item" target="_blank" href="https://threejs.org/">
 				three.js r{REVISION}
 			</a>
@@ -17,7 +25,7 @@ export function Footer() {
 			<a
 				class="item"
 				target="_blank"
-				href="https://github.com/donmccurdy/three-gltf-viewer/issues/new"
+				href="https://github.com/northwestern-mti/bienen-piano-viewer/issues/new"
 			>
 				help & feedback
 			</a>
@@ -26,7 +34,7 @@ export function Footer() {
 				|
 			</span>
 
-			<a class="item" target="_blank" href="https://github.com/donmccurdy/three-gltf-viewer">
+			<a class="item" target="_blank" href="https://github.com/northwestern-mti/bienen-piano-viewer">
 				github
 			</a>
 		</footer>
