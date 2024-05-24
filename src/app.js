@@ -36,7 +36,7 @@ class App {
 		this.inputEl = el.querySelector('#file-input');
 		this.validator = new Validator(el);
 
-		// this.hideSpinner();
+		this.hideSpinner();
 
 		const options = this.options;
 
@@ -111,6 +111,8 @@ class App {
 		if (this.viewer) this.viewer.clear();
 
 		const viewer = this.viewer || this.createViewer();
+
+		this.showSpinner()
 
 		// const fileURL = typeof rootFile === 'string' ? rootFile : URL.createObjectURL(rootFile);
 		const fileURL = rootPath + rootFile;
