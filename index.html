@@ -34,10 +34,8 @@
 
 	<main class="wrap">
 		<div class="dropzone">
-			<div class="placeholder">
+			<div id="button-container" class="placeholder">
 				<p>Choose a song to get started</p>
-				<button onclick="chooseSong('homesweethome')">Home, Sweet Home</button>
-				<button onclick="chooseSong('lachasse')">La Chasse (The Hunt)</button>
 			</div>
 		</div>
 		<div class="spinner"></div>
@@ -87,16 +85,3 @@
 		</a>
 	</footer>
 </body>
-
-<script>
-	function chooseSong(songName) {
-		const rootPath = '/assets';
-
-		// Update the audio source
-		const audio = document.getElementById('piano-audio')
-		audio.src = `${rootPath}/audio/${songName}.mp3`;
-
-		// View the model
-		window.VIEWER.app.view(`/models/${songName}.glb`, rootPath, new Map())
-	}
-</script>

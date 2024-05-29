@@ -161,6 +161,18 @@ class App {
 }
 
 
+function chooseSong(songName) {
+	const rootPath = '/assets';
+
+	// Update the audio source
+	const audio = document.getElementById('piano-audio')
+	audio.src = `${rootPath}/audio/${songName}.mp3`;
+
+	// View the model
+	window.VIEWER.app.view(`/models/${songName}.glb`, rootPath, new Map())
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
 	const app = new App(document.body, location);
 	app.createScrubBar(document.getElementById('scrub-bar-container'))
@@ -168,6 +180,20 @@ document.addEventListener('DOMContentLoaded', () => {
 	window.VIEWER.app = app;
 
 	console.info('[glTF Viewer] Debugging data exported as `window.VIEWER`.');
+
+	// Fetch and render the list of songs
+	fetch('/assets/songs.json')
+		.then(response => response.json())
+		.then(songList => {
+			const buttonContainer = document.getElementById('button-container');
+			for (let song of songList) {
+				console.log(song)
+				let button = document.createElement('button');
+				button.onclick = () => chooseSong(song.id);
+				button.innerText = song.title;
+				buttonContainer.appendChild(button);
+			}
+		})
 
 	if (REVISION) {
 		document.getElementById('footer-three-js-version').innerText = ' r' + REVISION;
