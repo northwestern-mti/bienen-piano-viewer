@@ -1,10 +1,11 @@
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { Viewer } from './viewer.js';
 import { Validator } from './validator.js';
-import { Footer } from './components/footer';
 import queryString from 'query-string';
 
 import { ScrubBar } from './scrub-bar.js'
+
+import { REVISION } from 'three';
 
 window.VIEWER = {};
 
@@ -160,7 +161,6 @@ class App {
 	}
 }
 
-document.body.innerHTML += Footer();
 
 document.addEventListener('DOMContentLoaded', () => {
 	const app = new App(document.body, location);
@@ -169,4 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	window.VIEWER.app = app;
 
 	console.info('[glTF Viewer] Debugging data exported as `window.VIEWER`.');
+
+	if (REVISION) {
+		document.getElementById('footer-three-js-version').innerText = ' r' + REVISION;
+	}
 });
