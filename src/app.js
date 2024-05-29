@@ -1,6 +1,6 @@
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { Viewer } from './viewer.js';
-import { Validator } from './validator.js';
+// import { Validator } from './validator.js';
 // import queryString from 'query-string';
 
 import { ScrubBar } from './scrub-bar.js'
@@ -36,7 +36,7 @@ class App {
 		this.spinnerEl = el.querySelector('.spinner');
 		this.dropEl = el.querySelector('.dropzone');
 		this.inputEl = el.querySelector('#file-input');
-		this.validator = new Validator(el);
+		// this.validator = new Validator(el);
 
 		this.hideSpinner();
 
@@ -126,11 +126,11 @@ class App {
 			.loadURL(fileURL)
 			.catch((e) => this.onError(e))
 			.then((gltf) => {
-				// TODO: GLTFLoader parsing can fail on invalid files. Ideally,
-				// we could run the validator either way.
-				if (!this.options.kiosk) {
-					this.validator.validate(fileURL, rootPath, fileMap, gltf);
-				}
+				// // TODO: GLTFLoader parsing can fail on invalid files. Ideally,
+				// // we could run the validator either way.
+				// if (!this.options.kiosk) {
+				// 	this.validator.validate(fileURL, rootPath, fileMap, gltf);
+				// }
 				cleanup();
 			});
 	}
