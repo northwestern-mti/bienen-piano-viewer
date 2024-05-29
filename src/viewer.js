@@ -634,7 +634,7 @@ export class Viewer {
 		playbackSpeedCtrl.onChange((speed) => {
 			if (this.mixer) this.mixer.timeScale = speed;
 		});
-		this.animFolder.add({ playAll: () => this.playAllClips() }, 'playAll');
+		// this.animFolder.add({ playAll: () => this.playAllClips() }, 'playAll');
 
 		// Morph target controls.
 		this.morphFolder = gui.addFolder('Morph Targets');
@@ -644,19 +644,19 @@ export class Viewer {
 		this.cameraFolder = gui.addFolder('Cameras');
 		this.cameraFolder.domElement.style.display = 'none';
 
-		// Stats.
-		const perfFolder = gui.addFolder('Performance');
-		const perfLi = document.createElement('li');
-		this.stats.dom.style.position = 'static';
-		perfLi.appendChild(this.stats.dom);
-		perfLi.classList.add('gui-stats');
-		perfFolder.__ul.appendChild(perfLi);
+		// // Stats.
+		// const perfFolder = gui.addFolder('Performance');
+		// const perfLi = document.createElement('li');
+		// this.stats.dom.style.position = 'static';
+		// perfLi.appendChild(this.stats.dom);
+		// perfLi.classList.add('gui-stats');
+		// perfFolder.__ul.appendChild(perfLi);
 
 		const guiWrap = document.createElement('div');
 		this.el.appendChild(guiWrap);
 		guiWrap.classList.add('gui-wrap');
 		guiWrap.appendChild(gui.domElement);
-		gui.open();
+		gui.close();
 	}
 
 	updateGUI() {
@@ -728,14 +728,14 @@ export class Viewer {
 					actionStates[clip.name] = false;
 				}
 
-				// Play other clips when enabled.
-				const ctrl = this.animFolder.add(actionStates, clip.name).listen();
-				ctrl.onChange((playAnimation) => {
-					action = action || this.mixer.clipAction(clip);
-					action.setEffectiveTimeScale(1);
-					playAnimation ? action.play() : action.stop();
-				});
-				this.animCtrls.push(ctrl);
+				// // Play other clips when enabled.
+				// const ctrl = this.animFolder.add(actionStates, clip.name).listen();
+				// ctrl.onChange((playAnimation) => {
+				// 	action = action || this.mixer.clipAction(clip);
+				// 	action.setEffectiveTimeScale(1);
+				// 	playAnimation ? action.play() : action.stop();
+				// });
+				// this.animCtrls.push(ctrl);
 			});
 		}
 	}
