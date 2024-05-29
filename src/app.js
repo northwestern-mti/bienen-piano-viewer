@@ -1,7 +1,7 @@
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { Viewer } from './viewer.js';
 import { Validator } from './validator.js';
-import queryString from 'query-string';
+// import queryString from 'query-string';
 
 import { ScrubBar } from './scrub-bar.js'
 
@@ -21,13 +21,14 @@ class App {
 	 * @param  {Location} location
 	 */
 	constructor(el, location) {
-		const hash = location.hash ? queryString.parse(location.hash) : {};
-		this.options = {
-			kiosk: Boolean(hash.kiosk),
-			model: hash.model || '',
-			preset: hash.preset || '',
-			cameraPosition: hash.cameraPosition ? hash.cameraPosition.split(',').map(Number) : null,
-		};
+		// const hash = location.hash ? queryString.parse(location.hash) : {};
+		// this.options = {
+		// 	kiosk: Boolean(hash.kiosk),
+		// 	model: hash.model || '',
+		// 	preset: hash.preset || '',
+		// 	cameraPosition: hash.cameraPosition ? hash.cameraPosition.split(',').map(Number) : null,
+		// };
+		this.options = {}
 
 		this.el = el;
 		this.viewer = null;
@@ -39,16 +40,14 @@ class App {
 
 		this.hideSpinner();
 
-		const options = this.options;
+		// if (this.options.kiosk) {
+		// 	const headerEl = document.querySelector('header');
+		// 	headerEl.style.display = 'none';
+		// }
 
-		if (options.kiosk) {
-			const headerEl = document.querySelector('header');
-			headerEl.style.display = 'none';
-		}
-
-		if (options.model) {
-			this.view(options.model, '', new Map());
-		}
+		// if (this.options.model) {
+		// 	this.view(this.options.model, '', new Map());
+		// }
 	}
 
 	/**
