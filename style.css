@@ -119,7 +119,7 @@ header h1 > a {
   pointer-events: none;
 }
 
-.gui-wrap > .main {
+.gui-wrap > .root {
   pointer-events: all;
   max-height: 100%;
   overflow: auto;

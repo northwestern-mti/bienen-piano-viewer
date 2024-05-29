@@ -30,7 +30,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-import { GUI } from 'dat.gui';
+import { GUI } from 'lil-gui';
 
 import { environments } from './environments.js';
 
