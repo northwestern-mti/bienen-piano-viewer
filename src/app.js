@@ -161,15 +161,16 @@ class App {
 }
 
 
+const assetPath = 'assets';
+
 function chooseSong(songName) {
-	const rootPath = '/assets';
 
 	// Update the audio source
 	const audio = document.getElementById('piano-audio')
-	audio.src = `${rootPath}/audio/${songName}.mp3`;
+	audio.src = `${assetPath}/audio/${songName}.mp3`;
 
 	// View the model
-	window.VIEWER.app.view(`/models/${songName}.glb`, rootPath, new Map())
+	window.VIEWER.app.view(`/models/${songName}.glb`, assetPath, new Map())
 }
 
 
@@ -182,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	console.info('[glTF Viewer] Debugging data exported as `window.VIEWER`.');
 
 	// Fetch and render the list of songs
-	fetch('/assets/songs.json')
+	fetch(`${assetPath}/songs.json`)
 		.then(response => response.json())
 		.then(songList => {
 			const buttonContainer = document.getElementById('button-container');
